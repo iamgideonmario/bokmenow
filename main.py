@@ -228,7 +228,7 @@ def get_available_slots(host_slug: str, start: date, end: date, db: Session = De
                 slots.append({
                     "start": slot_start.astimezone(pytz.utc).isoformat(),
                     "end": slot_end.astimezone(pytz.utc).isoformat()
-                })s
+                })
                 slot_start = slot_end
         
         current += delta
