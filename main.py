@@ -1,4 +1,5 @@
 import os
+from urllib.parse import urlparse
 from datetime import datetime, date, time, timedelta, timezone
 from typing import List, Optional
 from uuid import UUID, uuid4
@@ -19,7 +20,17 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # --- DB setup -------------------------------------------------
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql+psycopg2://user:pass@host/db")
+# DATABASE_URL = os.getenv("DATABASE_URL", "postgresql+psycopg2://user:pass@host/db")
+#engine = create_engine(DATABASE_URL, pool_pre_ping=True)
+#Base = declarative_base()
+
+# --- DB setup -------------------------------------------------
+raw_db_url = os.getenv("DATABASE_URL", "postgresql+psycopg2://user:pass@host/db")
+
+if "?pgbouncer=true" in raw_db_url:
+    raw_db_url = raw_db_url.replace("?pgbouncer=true", "")
+
+DATABASE_URL = raw_db_url.replace("postgresql://", "postgresql+psycopg2://")
 engine = create_engine(DATABASE_URL, pool_pre_ping=True)
 Base = declarative_base()
 
