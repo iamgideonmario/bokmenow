@@ -1,0 +1,19 @@
+# Secrets
+.env
+
+# Python
+__pycycache__/
+*.pyc
+*.pyo
+*.egg-info/
+venv/
+.env/
+
+# Node
+node_modules/
+.next/
+out/
+
+# IDE
+.vscode/
+.idea/
